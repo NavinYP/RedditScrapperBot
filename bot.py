@@ -91,8 +91,8 @@ async def on_ready():
     print(f"{client.user} has connected to Discord!")
 
 
-async def stay_alive_ping():
-    await client.send_message("general", 'Pong!')
+def stay_alive_ping():
+    client.send_message("general", 'ping')
 
 
 client.run(TOKEN)
@@ -101,7 +101,7 @@ scheduler = BlockingScheduler()
 scheduler.add_job(stay_alive_ping(), 'interval', minutes=5)
 scheduler.start()
 
-stay_alive_ping()
+client.send_message("general", 'ping')
 
 
 
