@@ -11,7 +11,7 @@ load_dotenv()
 TOKEN = os.getenv("TOKEN")
 client = commands.Bot(command_prefix=".")
 
-# RedditScraperBot v0.4
+# RedditScraperBot v0.5
 # Written by Navin Pemarathne (Storm)
 
 
@@ -33,9 +33,13 @@ async def setsub(ctx, extension):
     subreddit = reddit.subreddit(subreddit_name)
     await ctx.send(f"Subreddit set to {subreddit_name}")
 
+    global sort_methods
+    sort_methods = {"controversial": subreddit.controversial, "gilded": subreddit.gilded, "hot": subreddit.hot,
+                    "new": subreddit.new, "rising": subreddit.rising, "top": subreddit.top}
+
 
 @client.command()
-async def sortmethod(ctx, extension):
+async def sort(ctx, extension):
     global sort_method
     sort_method = extension
     await ctx.send(f"Sort method set to {sort_method}")
@@ -43,13 +47,19 @@ async def sortmethod(ctx, extension):
 
 @client.command()
 async def pics(ctx, extension):
+    image_formats = [".jpeg", ".png", ".jpg", ".gif", "img", "reddituploads"]
     submission_count = int(extension)
-    for submission in subreddit.hot(limit=submission_count):
-        print("Posting link...")
-        await ctx.send(submission.url)  # Output: the URL the submission points to.
-        print("Done!\n")
+    for submission in sort_methods[sort_method](limit=submission_count):
+        if any(ext in submission.url for ext in image_formats):
+            print("Posting link...")
+            await ctx.send(submission.url)  # Output: the URL the submission points to.
+            print("Done!\n")
+        else:
+            submission_count += 1
+    print("Task completed.")
 
-bot_version = "v0.4"
+
+bot_version = "v0.5"
 
 # Getting credentials from the .env file or the cloud config.
 reddit = praw.Reddit(client_id=os.getenv("CLIENT_ID"),
@@ -60,4 +70,4 @@ reddit = praw.Reddit(client_id=os.getenv("CLIENT_ID"),
 
 print(f"""Welcome to RedditScraperBot {bot_version}.\n""")
 client.run(TOKEN)
-image_formats = [".jpeg", ".png", ".jpg", ".gif", "img",]
+
