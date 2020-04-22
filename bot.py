@@ -11,7 +11,7 @@ load_dotenv()
 TOKEN = os.getenv("TOKEN")
 client = commands.Bot(command_prefix=".")
 
-# RedditScraperBot v0.3
+# RedditScraperBot v0.4
 # Written by Navin Pemarathne (Storm)
 
 
@@ -26,11 +26,30 @@ async def ping(ctx):
 
 
 @client.command()
-async def setsubreddit(ctx, extension):
+async def setsub(ctx, extension):
     global subreddit_name
     subreddit_name = extension
+    global subreddit
+    subreddit = reddit.subreddit(subreddit_name)
+    await ctx.send(f"Subreddit set to {subreddit_name}")
 
-bot_version = "v0.1"
+
+@client.command()
+async def sortmethod(ctx, extension):
+    global sort_method
+    sort_method = extension
+    await ctx.send(f"Sort method set to {sort_method}")
+
+
+@client.command()
+async def pics(ctx, extension):
+    submission_count = int(extension)
+    for submission in subreddit.hot(limit=submission_count):
+        print("Posting link...")
+        await ctx.send(submission.url)  # Output: the URL the submission points to.
+        print("Done!\n")
+
+bot_version = "v0.4"
 
 # Getting credentials from the .env file or the cloud config.
 reddit = praw.Reddit(client_id=os.getenv("CLIENT_ID"),
