@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/RedditScraperBot.iml" filepath="$PROJECT_DIR$/.idea/RedditScraperBot.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../RedditScraper/.idea/TempestBot.iml" filepath="$PROJECT_DIR$/../RedditScraper/.idea/TempestBot.iml" />
     </modules>
   </component>
 </project>

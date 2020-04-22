@@ -4,8 +4,6 @@ import urllib
 import datetime
 import discord
 
-from apscheduler.schedulers.blocking import BlockingScheduler
-
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -13,19 +11,17 @@ load_dotenv()
 TOKEN = os.getenv("TOKEN")
 client = discord.Client()
 
-# RedditScraperBot v0.3
+# RedditScraperBot v0.1
+# Written by Navin Pemarathne (Storm)
 
-bot_version = "v0.3"
+bot_version = "v0.1"
 
-# Getting credentials from the .env file.
-# todo:Might have to change this later.
+# Getting credentials from the .env file or the cloud config.
 reddit = praw.Reddit(client_id=os.getenv("CLIENT_ID"),
                      client_secret=os.getenv("CLIENT_SECRET"),
                      password=os.getenv("PASSWORD"),
                      user_agent=os.getenv("USER_AGENT"),
                      username=os.getenv("REDDIT_USERNAME"))
-
-current_directory = os.getcwd()
 
 
 def get_subreddit_name():
@@ -90,19 +86,7 @@ print(f"""Welcome to TempestBot {bot_version}.\n""")
 async def on_ready():
     print(f"{client.user} has connected to Discord!")
 
-
-def stay_alive_ping():
-    client.send_message("general", 'ping')
-
-
 client.run(TOKEN)
-
-scheduler = BlockingScheduler()
-scheduler.add_job(stay_alive_ping(), 'interval', minutes=5)
-scheduler.start()
-
-client.send_message("general", 'ping')
-
 
 
 
