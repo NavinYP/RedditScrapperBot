@@ -47,7 +47,7 @@ async def sort(ctx, extension):
 
 @client.command()
 async def pics(ctx, extension):
-    image_formats = [".jpeg", ".png", ".jpg", ".gif", "img", "reddituploads"]
+    image_formats = [".jpeg", ".png", ".jpg", ".gif", "img", "reddituploads", "gfycat", "imgur"]
     submission_count = int(extension)
     for submission in sort_methods[sort_method](limit=submission_count):
         if any(ext in submission.url for ext in image_formats):
