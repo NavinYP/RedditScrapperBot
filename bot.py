@@ -1,7 +1,6 @@
 import praw
 import os
 import urllib
-import datetime
 import discord
 
 from dotenv import load_dotenv
@@ -12,7 +11,7 @@ load_dotenv()
 TOKEN = os.getenv("TOKEN")
 client = commands.Bot(command_prefix=".")
 
-# RedditScraperBot v0.1
+# RedditScraperBot v0.3
 # Written by Navin Pemarathne (Storm)
 
 
@@ -26,6 +25,11 @@ async def ping(ctx):
     await ctx.send("pong")
 
 
+@client.command()
+async def setsubreddit(ctx, extension):
+    global subreddit_name
+    subreddit_name = extension
+
 bot_version = "v0.1"
 
 # Getting credentials from the .env file or the cloud config.
@@ -35,19 +39,6 @@ reddit = praw.Reddit(client_id=os.getenv("CLIENT_ID"),
                      user_agent=os.getenv("USER_AGENT"),
                      username=os.getenv("REDDIT_USERNAME"))
 
-print(f"""Welcome to TempestBot {bot_version}.\n""")
+print(f"""Welcome to RedditScraperBot {bot_version}.\n""")
 client.run(TOKEN)
 image_formats = [".jpeg", ".png", ".jpg", ".gif", "img",]
-
-
-
-
-
-
-
-
-
-
-
-
-
