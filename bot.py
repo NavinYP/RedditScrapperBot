@@ -57,6 +57,7 @@ async def pics(ctx, extension):
         else:
             submission_count += 1
     print("Task completed.")
+    await ctx.send("Task completed.")
 
 
 @client.command()
@@ -75,7 +76,7 @@ async def keyword(ctx, extension):
 
 @client.command()
 async def search(ctx, extension):
-    image_formats = [".jpeg", ".png", ".jpg", ".gif", "img", "reddituploads"]
+    image_formats = [".jpeg", ".png", ".jpg", ".gif", "img", "reddituploads", "gfycat", "imgur"]
     submission_count = int(extension)
     count = submission_count
     for submission in reddit.subreddit(subreddit_name).search(keyword, sort_method, "lucene", time_mode):
@@ -86,6 +87,11 @@ async def search(ctx, extension):
                 print("Done!\n")
                 submission_count -= 1
     print("Task completed.")
+    await ctx.send("Task completed.")
+
+
+# @client.command()
+# async def debug(ctx, extension):
 
 
 bot_version = "v1.0"
