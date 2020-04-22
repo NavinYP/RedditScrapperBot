@@ -11,7 +11,7 @@ load_dotenv()
 TOKEN = os.getenv("TOKEN")
 client = commands.Bot(command_prefix=".")
 
-# RedditScraperBot v0.5
+# RedditScraperBot v1.0
 # Written by Navin Pemarathne (Storm)
 
 
@@ -59,7 +59,36 @@ async def pics(ctx, extension):
     print("Task completed.")
 
 
-bot_version = "v0.5"
+@client.command()
+async def settime(ctx, extension):
+    global time_mode # Can be all, day, hour, month, week, year (default: all).
+    time_mode = extension
+    await ctx.send(f"Time sort set to {time_mode}")
+
+
+@client.command()
+async def keyword(ctx, extension):
+    global keyword
+    keyword = extension
+    await ctx.send(f"Keyword is {keyword}")
+
+
+@client.command()
+async def search(ctx, extension):
+    image_formats = [".jpeg", ".png", ".jpg", ".gif", "img", "reddituploads"]
+    submission_count = int(extension)
+    count = submission_count
+    for submission in reddit.subreddit(subreddit_name).search(keyword, sort_method, "lucene", time_mode):
+        if submission_count > 0:
+            if any(ext in submission.url for ext in image_formats):
+                print("Posting link...")
+                await ctx.send(submission.url)  # Output: the URL the submission points to.
+                print("Done!\n")
+                submission_count -= 1
+    print("Task completed.")
+
+
+bot_version = "v1.0"
 
 # Getting credentials from the .env file or the cloud config.
 reddit = praw.Reddit(client_id=os.getenv("CLIENT_ID"),
