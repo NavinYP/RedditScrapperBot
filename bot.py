@@ -1,10 +1,10 @@
 import praw
-import dotenv
 import os
 import urllib
 import datetime
 import discord
 
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 from dotenv import load_dotenv
 
@@ -90,7 +90,21 @@ print(f"""Welcome to TempestBot {bot_version}.\n""")
 async def on_ready():
     print(f"{client.user} has connected to Discord!")
 
+
+def stay_alive_ping():
+    await client.send_message("general", 'Pong!')
+
+
 client.run(TOKEN)
+
+scheduler = BlockingScheduler()
+scheduler.add_job(stay_alive_ping(), 'interval', minutes=5)
+scheduler.start()
+
+stay_alive_ping()
+
+
+
 
 
 
