@@ -91,7 +91,7 @@ async def on_ready():
     print(f"{client.user} has connected to Discord!")
 
 
-def stay_alive_ping():
+async def stay_alive_ping():
     await client.send_message("general", 'Pong!')
 
 
