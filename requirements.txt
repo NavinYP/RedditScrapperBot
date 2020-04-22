@@ -24,3 +24,4 @@ websocket-client==0.57.0
 websockets==8.1
 wrapt==1.11.2
 yarl==1.4.2
+newrelic
