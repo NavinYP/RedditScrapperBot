@@ -161,7 +161,7 @@ reddit = praw.Reddit(client_id=os.getenv("CLIENT_ID"),
                      user_agent=os.getenv("USER_AGENT"),
                      username=os.getenv("REDDIT_USERNAME"))
 
-print(f"""Welcome to RedditScraperBot {bot_version}.\n""")
+print(f"""Welcome to RedditScraperBot {bot_version} (Read-only).\n""")
 
 subreddit_name = "all"
 subreddit = reddit.subreddit(subreddit_name)
