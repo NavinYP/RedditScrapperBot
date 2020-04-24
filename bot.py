@@ -9,7 +9,7 @@ from discord.ext import commands
 load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
-client = commands.Bot(command_prefix=".")
+client = commands.Bot(command_prefix="?")
 
 # RedditScraperBot v1.0
 # Written by Navin Pemarathne (Storm)
@@ -18,11 +18,6 @@ client = commands.Bot(command_prefix=".")
 @client.event
 async def on_ready():
     print(f"{client.user} has connected to Discord!")
-
-
-@client.command()
-async def ping(ctx):
-    await ctx.send("pong")
 
 
 @client.command()
@@ -46,7 +41,7 @@ async def sort(ctx, extension):
 
 
 @client.command()
-async def pics(ctx, extension):
+async def scrape(ctx, extension):
     image_formats = [".jpeg", ".png", ".jpg", ".gif", "img", "reddituploads", "gfycat", "imgur"]
     submission_count = int(extension)
     for submission in sort_methods[sort_method](limit=submission_count):
