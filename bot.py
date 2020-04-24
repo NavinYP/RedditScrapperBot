@@ -11,10 +11,10 @@ TOKEN = os.getenv("TOKEN")
 client = commands.Bot(command_prefix="?")
 client.remove_command("help")
 
-bot_version = "v1.1"
+bot_version = "v1.1r"
 
 
-# RedditScraperBot v1.1
+# RedditScraperBot v1.1r (Read-Only Version)
 # Written by Navin Pemarathne (Storm)
 
 
@@ -133,7 +133,8 @@ async def help(ctx, extension):
         embed.add_field(name="?scrape <number_of_pics>", value="Scrapes the subreddit and posts the number of pics want"
                                                                "ed.", inline=False)
         embed.add_field(name="?search <keyword> <number_of_pics>", value="Search the subreddit using the set parameters"
-                                                                         " and posts the number of pics wanted.",
+                                                                         " and posts the number of pics wanted. Use + "
+                                                                         "on keywords instead of spaces.",
                         inline=False)
         embed.add_field(name="?help <command_name>", value="Shows more info about the required command", inline=False)
 
