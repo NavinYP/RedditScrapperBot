@@ -12,6 +12,8 @@ client = commands.Bot(command_prefix="?")
 client.remove_command("help")
 
 bot_version = "v1.1"
+
+
 # RedditScraperBot v1.1
 # Written by Navin Pemarathne (Storm)
 
@@ -27,10 +29,6 @@ async def setsub(ctx, extension):
     subreddit_name = extension
     subreddit = reddit.subreddit(subreddit_name)
     await ctx.send(f"Subreddit set to {subreddit_name}")
-
-    global sort_methods
-    sort_methods = {"controversial": subreddit.controversial, "gilded": subreddit.gilded, "hot": subreddit.hot,
-                    "new": subreddit.new, "rising": subreddit.rising, "top": subreddit.top}
 
 
 @client.command()
@@ -70,7 +68,7 @@ async def scrape_error(ctx, error):
 
 @client.command()
 async def settime(ctx, extension):
-    global time_mode # Can be all, day, hour, month, week, year (default: all).
+    global time_mode  # Can be all, day, hour, month, week, year (default: all).
     time_mode = extension
     await ctx.send(f"Time sort set to {time_mode}")
 
@@ -102,12 +100,12 @@ async def search(ctx, extension, extension2):
         sort_method = "top"
 
     for submission in reddit.subreddit(subreddit_name).search(keyword, sort_method, "lucene", time_mode):
-        if submission_count > 0:
+        if count > 0:
             if any(ext in submission.url for ext in image_formats):
                 print("Posting link...")
                 await ctx.send(submission.url)  # Output: the URL the submission points to.
                 print("Done!\n")
-                submission_count -= 1
+                count -= 1
     print("Task completed.")
     await ctx.send("Task completed.")
 
@@ -167,5 +165,7 @@ print(f"""Welcome to RedditScraperBot {bot_version}.\n""")
 subreddit_name = "all"
 subreddit = reddit.subreddit(subreddit_name)
 
-client.run(TOKEN)
+sort_methods = {"controversial": subreddit.controversial, "gilded": subreddit.gilded, "hot": subreddit.hot,
+                "new": subreddit.new, "rising": subreddit.rising, "top": subreddit.top}
 
+client.run(TOKEN)
