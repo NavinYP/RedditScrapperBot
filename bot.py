@@ -21,7 +21,6 @@ async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=discord.Game("?help general for help."))
     print(f"{client.user} has connected to Discord!")
 
-
 @client.command()
 async def setsub(ctx, extension):
     global subreddit_name
@@ -46,6 +45,13 @@ async def sort(ctx, extension):
 async def scrape(ctx, extension):
     image_formats = [".jpeg", ".png", ".jpg", ".gif", "img", "reddituploads", "gfycat", "imgur"]
     submission_count = int(extension)
+
+    if "sort_method" in globals():
+        pass
+    else:
+        global sort_method
+        sort_method = "top"
+
     for submission in sort_methods[sort_method](limit=submission_count):
         if any(ext in submission.url for ext in image_formats):
             print("Posting link...")
@@ -55,6 +61,12 @@ async def scrape(ctx, extension):
             submission_count += 1
     print("Task completed.")
     await ctx.send("Task completed.")
+
+
+@scrape.error
+async def scrape_error(ctx, error):
+    if isinstance(error, commands.CommandInvokeError):
+        await ctx.send("Please set a valid subreddit name.")
 
 
 @client.command()
@@ -76,6 +88,19 @@ async def search(ctx, extension):
     image_formats = [".jpeg", ".png", ".jpg", ".gif", "img", "reddituploads", "gfycat", "imgur"]
     submission_count = int(extension)
     count = submission_count
+
+    if "time_mode" in globals():
+        pass
+    else:
+        global time_mode
+        time_mode = "all"
+
+    if "sort_method" in globals():
+        pass
+    else:
+        global sort_method
+        sort_method = "top"
+
     for submission in reddit.subreddit(subreddit_name).search(keyword, sort_method, "lucene", time_mode):
         if submission_count > 0:
             if any(ext in submission.url for ext in image_formats):
@@ -85,6 +110,12 @@ async def search(ctx, extension):
                 submission_count -= 1
     print("Task completed.")
     await ctx.send("Task completed.")
+
+
+@search.error
+async def search_error(ctx, error):
+    if isinstance(error, commands.CommandInvokeError):
+        await ctx.send("Please set a valid subreddit name.")
 
 
 @client.command()
@@ -97,9 +128,10 @@ async def help(ctx, extension):
 
     if extension == "general":
         embed.set_author(name="General Help")
-        embed.add_field(name="?setsub <subreddit_name>", value="Sets the current subreddit.", inline=False)
-        embed.add_field(name="?sort <sort_method>", value="Sets the current sort method.", inline=False)
-        embed.add_field(name="?settime <time_sort_method>", value="Sets the timeframe.", inline=False)
+        embed.add_field(name="?setsub <subreddit_name>", value="Sets the current subreddit. (Default - /r/all)",
+                        inline=False)
+        embed.add_field(name="?sort <sort_method>", value="Sets the current sort method. (Default - top)", inline=False)
+        embed.add_field(name="?settime <time_sort_method>", value="Sets the timeframe. (Default - all)", inline=False)
         embed.add_field(name="?keyword <keyword>", value="Sets the current search keyword.", inline=False)
         embed.add_field(name="?scrape <number_of_pics>", value="Scrapes the subreddit and posts the number of pics want"
                                                                "ed.", inline=False)
