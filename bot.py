@@ -27,7 +27,13 @@ async def on_ready():
 @client.command()
 async def setsub(ctx, extension):
     subreddit_name = extension
+    global subreddit
     subreddit = reddit.subreddit(subreddit_name)
+
+    global sort_methods
+    sort_methods = {"controversial": subreddit.controversial, "gilded": subreddit.gilded, "hot": subreddit.hot,
+                    "new": subreddit.new, "rising": subreddit.rising, "top": subreddit.top}
+
     await ctx.send(f"Subreddit set to {subreddit_name}")
 
 
@@ -42,6 +48,16 @@ async def sort(ctx, extension):
 async def scrape(ctx, extension):
     image_formats = [".jpeg", ".png", ".jpg", ".gif", "img", "reddituploads", "gfycat", "imgur"]
     submission_count = int(extension)
+
+    if "subreddit" in globals():
+        pass
+    else:
+        subreddit_name = "all"
+        subreddit = reddit.subreddit(subreddit_name)
+
+        global sort_methods
+        sort_methods = {"controversial": subreddit.controversial, "gilded": subreddit.gilded, "hot": subreddit.hot,
+                        "new": subreddit.new, "rising": subreddit.rising, "top": subreddit.top}
 
     if "sort_method" in globals():
         pass
@@ -86,6 +102,17 @@ async def search(ctx, extension, extension2):
     submission_count = int(extension2)
     count = submission_count
     keyword = extension
+
+    if "subreddit" in globals():
+        pass
+    else:
+        global subreddit_name
+        subreddit_name = "all"
+        global subreddit
+        subreddit = reddit.subreddit(subreddit_name)
+
+        sort_methods = {"controversial": subreddit.controversial, "gilded": subreddit.gilded, "hot": subreddit.hot,
+                        "new": subreddit.new, "rising": subreddit.rising, "top": subreddit.top}
 
     if "time_mode" in globals():
         pass
@@ -162,10 +189,6 @@ reddit = praw.Reddit(client_id=os.getenv("CLIENT_ID"),
 
 print(f"""Welcome to RedditScraperBot {bot_version}.\n""")
 
-subreddit_name = "all"
-subreddit = reddit.subreddit(subreddit_name)
 
-sort_methods = {"controversial": subreddit.controversial, "gilded": subreddit.gilded, "hot": subreddit.hot,
-                "new": subreddit.new, "rising": subreddit.rising, "top": subreddit.top}
 
 client.run(TOKEN)
