@@ -10,6 +10,7 @@ load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
 client = commands.Bot(command_prefix="?")
+client.remove_command("help")
 
 # RedditScraperBot v1.0
 # Written by Navin Pemarathne (Storm)
@@ -17,6 +18,7 @@ client = commands.Bot(command_prefix="?")
 
 @client.event
 async def on_ready():
+    await client.change_presence(status=discord.Status.online, activity=discord.Game("?help general for help."))
     print(f"{client.user} has connected to Discord!")
 
 
@@ -83,6 +85,40 @@ async def search(ctx, extension):
                 submission_count -= 1
     print("Task completed.")
     await ctx.send("Task completed.")
+
+
+@client.command()
+async def help(ctx, extension):
+    author = ctx.message.author
+
+    embed = discord.Embed(
+        color=discord.Color.orange()
+    )
+
+    if extension == "general":
+        embed.set_author(name="General Help")
+        embed.add_field(name="?setsub <subreddit_name>", value="Sets the current subreddit.", inline=False)
+        embed.add_field(name="?sort <sort_method>", value="Sets the current sort method.", inline=False)
+        embed.add_field(name="?settime <time_sort_method>", value="Sets the timeframe.", inline=False)
+        embed.add_field(name="?keyword <keyword>", value="Sets the current search keyword.", inline=False)
+        embed.add_field(name="?scrape <number_of_pics>", value="Scrapes the subreddit and posts the number of pics want"
+                                                               "ed.", inline=False)
+        embed.add_field(name="?search <number_of_pics>", value="Search the subreddit using the set parameters and posts"
+                                                               " the number of pics wanted.", inline=False)
+        embed.add_field(name="?help <command_name>", value="Shows more info about the required command", inline=False)
+
+    if extension == "sort":
+        embed.set_author(name="sort <sort_method>")
+        embed.add_field(name="Available reddit sort methods.", value="top\nrising\nhot\nnew\ngilded\ncontroversial",
+                        inline=False)
+
+    if extension == "settime":
+        embed.set_author(name="settime <time_sort_method>")
+        embed.add_field(name="Available time sort methods.", value="all\nday\nhour\nmonth\nweek\nyear",
+                        inline=False)
+
+    await ctx.send(embed=embed)
+
 
 
 # @client.command()
