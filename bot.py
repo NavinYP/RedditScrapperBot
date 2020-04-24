@@ -47,7 +47,7 @@ async def scrape(ctx, extension):
         pass
     else:
         global sort_method
-        sort_method = "top"
+        sort_method = "hot"
 
     for submission in sort_methods[sort_method](limit=submission_count):
         if any(ext in submission.url for ext in image_formats):
@@ -128,7 +128,7 @@ async def help(ctx, extension):
         embed.set_author(name="General Help")
         embed.add_field(name="?setsub <subreddit_name>", value="Sets the current subreddit. (Default - /r/all)",
                         inline=False)
-        embed.add_field(name="?sort <sort_method>", value="Sets the current sort method. (Default - top)", inline=False)
+        embed.add_field(name="?sort <sort_method>", value="Sets the current sort method. (Default - hot)", inline=False)
         embed.add_field(name="?settime <time_sort_method>", value="Sets the timeframe. (Default - all)", inline=False)
         embed.add_field(name="?scrape <number_of_pics>", value="Scrapes the subreddit and posts the number of pics want"
                                                                "ed.", inline=False)
