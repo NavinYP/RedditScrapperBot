@@ -1,8 +1,3 @@
-# RedditScrapperBot
-
-
-- Need to be hosted on a seperate hosting site and added to Discord as a bot using Discord Developer Portal.
-
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -11,7 +6,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <h3 align="center">RedditScrapperBot</h3>
+  <h3 align="center">RedditScraperBot</h3>
 
   <p align="center">
     A Discord bot written using Discord.py that can scrape subreddit for links and post them on the server.
@@ -56,13 +51,20 @@
 <!-- WHAT I LEARNT -->
 ## What I Learnt
 
-- The process of hosting a bot or a site on a hosting platform like Heroku.
-- 
+- The process of hosting a bot or a site on a hosting platform like Heroku
+- Using listeners and responders of Discord.py
+- Updating deployed applications
 
 <!-- CONTACT -->
 ## Contact
 
-- Distributed under the GPL-3.0 License. See `LICENSE` for more information.
+<!-- CONTACT -->
+## Contact
+
+Navin Pemarathne - navin.pemarathne@gmail.com
+
+Project Link: [https://github.com/NavinYP/RedditScrapperBot](https://github.com/NavinYP/RedditScrapperBot)
+
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
