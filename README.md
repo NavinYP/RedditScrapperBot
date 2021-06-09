@@ -26,9 +26,6 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
@@ -54,8 +51,18 @@
 <!-- LICENSE -->
 ## License
 
-Distributed under the GPL-3.0 License. See `LICENSE` for more information.
+- Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 
+<!-- WHAT I LEARNT -->
+## What I Learnt
+
+- The process of hosting a bot or a site on a hosting platform like Heroku.
+- 
+
+<!-- CONTACT -->
+## Contact
+
+- Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
