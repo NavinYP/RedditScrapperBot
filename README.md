@@ -45,6 +45,8 @@
 
 - Need to be hosted on a seperate hosting site and added to Discord as a bot using Discord Developer Portal.
 
+![Discord Banner 3](https://discord.com/api/oauth2/authorize?client_id=852835789288243240&permissions=2148002880&scope=bot)
+
 
 <!-- LICENSE -->
 ## License
