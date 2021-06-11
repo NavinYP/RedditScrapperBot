@@ -153,16 +153,16 @@ async def help(ctx, extension):
 
     if extension == "general":
         embed.set_author(name="General Help")
-        embed.add_field(name="?setsub <subreddit_name>", value="Sets the current subreddit. (Default - /r/all)",
+        embed.add_field(name="_setsub <subreddit_name>", value="Sets the current subreddit. (Default - /r/all)",
                         inline=False)
-        embed.add_field(name="?sort <sort_method>", value="Sets the current sort method. (Default - hot)", inline=False)
-        embed.add_field(name="?settime <time_sort_method>", value="Sets the timeframe. (Default - all)", inline=False)
-        embed.add_field(name="?scrape <number_of_pics>", value="Scrapes the subreddit and posts the number of pics want"
+        embed.add_field(name="_sort <sort_method>", value="Sets the current sort method. (Default - hot)", inline=False)
+        embed.add_field(name="_settime <time_sort_method>", value="Sets the timeframe. (Default - all)", inline=False)
+        embed.add_field(name="_scrape <number_of_pics>", value="Scrapes the subreddit and posts the number of pics want"
                                                                "ed.", inline=False)
-        embed.add_field(name="?search <keyword> <number_of_pics>", value="Search the subreddit using the set parameters"
+        embed.add_field(name="_search <keyword> <number_of_pics>", value="Search the subreddit using the set parameters"
                                                                          " and posts the number of pics wanted.",
                         inline=False)
-        embed.add_field(name="?help <command_name>", value="Shows more info about the required command", inline=False)
+        embed.add_field(name="_help <command_name>", value="Shows more info about the required command", inline=False)
 
     if extension == "sort":
         embed.set_author(name="sort <sort_method>")
