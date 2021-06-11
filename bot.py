@@ -8,7 +8,7 @@ from discord.ext import commands
 load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
-client = commands.Bot(command_prefix="?")
+client = commands.Bot(command_prefix="_")
 client.remove_command("help")
 
 bot_version = "v1.1"
@@ -20,7 +20,7 @@ bot_version = "v1.1"
 
 @client.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.online, activity=discord.Game("?help general for help."))
+    await client.change_presence(status=discord.Status.online, activity=discord.Game("_help general for help."))
     print(f"{client.user} has connected to Discord!")
 
 
